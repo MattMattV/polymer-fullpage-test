@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Polymer Imports -->
+        <script src="bower_components/webcomponentsjs/webcomponents.min.js"></script>
+
+        <link rel="import" href="bower_components/paper-badge/paper-badge.html">
+        <link rel="import" href="bower_components/paper-button/paper-button.html">
+        <link rel="import" href="bower_components/paper-card/paper-card.html">
+        <link rel="import" href="bower_components/paper-dialog/paper-dialog.html">
+        <link rel="import" href="bower_components/paper-drawer-panel/paper-drawer-panel.html">
+        <link rel="import" href="bower_components/paper-fab/paper-fab.html">
+        <link rel="import" href="bower_components/paper-header-panel/paper-header-panel.html">
+        <link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
+        <link rel="import" href="bower_components/paper-input/paper-input.html">
+        <link rel="import" href="bower_components/paper-item/paper-item.html">
+        <link rel="import" href="bower_components/paper-toolbar/paper-toolbar.html">
+
+        <link rel="import" href="bower_components/gold-cc-cvc-input/gold-cc-cvc-input.html">
+        <link rel="import" href="bower_components/gold-cc-expiration-input/gold-cc-expiration-input.html">
+        <link rel="import" href="bower_components/gold-cc-input/gold-cc-input.html">
+
+        <link rel="import" href="bower_components/font-roboto/roboto.html">
+        
+        <link rel="import" href="bower_components/iron-collapse/iron-collapse.html">
+        <link rel="import" href="bower_components/iron-flex-layout/classes/iron-flex-layout.html">
+        <link rel="import" href="bower_components/iron-form/iron-form.html">
+        <link rel="import" href="bower_components/iron-icons/av-icons.html">
+        <link rel="import" href="bower_components/iron-icons/editor-icons.html">
+        <link rel="import" href="bower_components/iron-icons/iron-icons.html">
+        <link rel="import" href="bower_components/iron-icons/social-icons.html">
+        <link rel="import" href="bower_components/iron-image/iron-image.html">
+
+        <link rel="import" href="bower_components/neon-animation/neon-animations.html">
+
+
+        <!-- personal files -->
+        <link rel="stylesheet" href="CSS/styles.css">
+        <script src="JS/clicks.js"></script>
+
+        <meta charset="UTF-8">
+        <title>Tuto from Polymer</title>
+
+
+    </head>
+
+    <body class="fullbleed layout vertical">
+        <template is="dom-bind">
+            <paper-drawer-panel>
+                <!-- contenu du drawer/offcanavs -->
+                <div drawer class="list">
+
+                        <paper-item id="TRUC">
+                            <paper-item-body>
+                                <a href="http://www.paris.fr">Paris !</a>
+                                <paper-button onclick="toggleCollapse('lienParis')">
+                                    <iron-icon icon="icons:add" aria-controls="liensParis" aria-expanded$="[[isExpanded(opened1)]]"></iron-icon>
+                                </paper-button>
+                            </paper-item-body>
+                        </paper-item>
+
+                        <iron-collapse id="lienParis" tabindex="0" opened="{{opened1}}">
+                            <div>
+                                <a href="www.toureiffel.paris/" id>
+                                    <paper-item>
+                                        <paper-item-body>
+                                            la tour Eiffel
+                                        </paper-item-body>
+                                    </paper-item>
+                                </a>
+                            </div>
+                        </iron-collapse>
+
+
+                    <a href="http://www.trace-software.com/fr/">
+                        <paper-item>
+                            <paper-item-body>
+                                TraceSoftware
+                            </paper-item-body>
+                        </paper-item>
+                    </a>
+
+                    <!--<paper-button paper-drawer-toggle>-->
+                        <!--<iron-icon icon="close"></iron-icon>-->
+                        <!--Fermer-->
+                    <!--</paper-button>-->
+
+                    <paper-fab mini class="drawerClose" icon="close" paper-drawer-toggle></paper-fab>
+                </div>
+
+                <!-- Contenu principal -->
+                <paper-header-panel main mode="waterfall" class="flex">
+                    <paper-toolbar>
+                        <paper-icon-button icon="menu" paper-drawer-toggle></paper-icon-button>
+                        <iron-icon class="brand" icon="social:public"></iron-icon>
+                        <div>RandoMarque.com !</div>
+                        <span class="flex"></span>
+                        <paper-icon-button icon="search" class="horizontal layout end"></paper-icon-button>
+                        <paper-icon-button id="more" icon="more-vert"></paper-icon-button>
+                        <paper-badge icon="av:new-releases" for="more" label="new"></paper-badge>
+
+                    </paper-toolbar>
+
+                    <div id="cards">
+                        <paper-card heading="Une image aléatoire">
+                            <img class="picture" src="http://lorempixel.com/200/200/city" />
+                        </paper-card>
+
+                        <paper-card heading="Annonce">
+                            <p style="text-align: center">Tout est fait avec Polymer !</p>
+                            <div class="card-actions">
+                                <paper-button>On clique ici</paper-button>
+                                <paper-button>Ou bien là !</paper-button>
+                            </div>
+                        </paper-card>
+                    </div>
+                </paper-header-panel>
+
+                <paper-toolbar>
+                    <paper-button raised class="button-modal" data-dialog="payment" onclick="clickHandler(event)">
+                        <iron-icon icon="credit-card"></iron-icon>
+                        Faire un don ?
+                    </paper-button>
+
+                    <span style="width: 200px"></span>
+
+                    <p>Made with</p>
+                    <img class="footerImage" src="https://elements.polymer-project.org/images/polymer.svg">
+                </paper-toolbar>
+            </paper-drawer-panel>
+
+            <!-- payment dialog -->
+            <paper-dialog id="payment" entry-animation="fade-in-animation" exit-animation="fade-out-animation" with-backdrop>
+
+                <h4>Entrez un montant :</h4>
+                <paper-input class="short" label="Montant" type="number">
+                    <iron-icon suffix icon="editor:attach-money"></iron-icon>
+                </paper-input>
+
+                <h4>Entrez vos informations de paiement.</h4>
+                <form is="iron-form" id="donate-form" method="post" action="#">
+                    <gold-cc-input required></gold-cc-input>
+                    <div class="layout horizontal" style="justify-content: space-between">
+                        <gold-cc-expiration-input required></gold-cc-expiration-input>
+                        <span></span>
+                        <gold-cc-cvc-input required></gold-cc-cvc-input>
+                    </div>
+
+                    <div class="buttons">
+                        <paper-button dialog-dismiss>Annuler</paper-button>
+                        <paper-button dialog-confirm autofocus>Donner !</paper-button>
+                    </div>
+                </form>
+            </paper-dialog>
+        </template>
+    </body>
+</html>
